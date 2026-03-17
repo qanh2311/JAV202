@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 @Controller
 public class UserController {
-    @GetMapping("/login")
-    public String login(){
-        return "login.html";
-    }
+//    @GetMapping("/login")
+//    public String login(){
+//        return "login.html";
+//    }
 
     @GetMapping("/index")
     public String index(Model model){
