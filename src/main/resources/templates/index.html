@@ -10,7 +10,15 @@
 <p>Ho va ten: <label th:text="${name}"></label></p>
 <p>Lop: <label th:text="${lop}"></label></p>
 <p>Tuoi: <label th:text="${tuoi}"></label></p>
-
+<hr>
+<h1>Thông tin đăng nhập</h1>
+<p>Username: <label th:text="${username}"></label></p>
+<p>Password: <label th:text="${password}"></label></p>
+<hr>
+<form action="/search" method="post">
+    Nhap sdt: <input type="text" name="phone">
+    <button type="submit" class="btn btn-danger">Tim kiem</button>
+</form>
 <h1>Danh sách</h1>
 <table class="table table-hover">
     <thead>
@@ -22,6 +30,7 @@
         <th>phone</th>
         <th>role</th>
         <th>active</th>
+        <th>Thao tác</th>
     </tr>
     </thead>
     <tbody>
@@ -33,34 +42,37 @@
         <td th:text="${user.phone}"></td>
         <td th:text="${user.role ? 'admin':'user'}"></td>
         <td th:text="${user.active ? 'Hoạt động':'Ngừng hoạt động'}"></td>
+        <td>
+            <a th:href="@{/detail(id=${user.id})}" class="btn btn-danger">Detail</a>
+        </td>
     </tr>
     </tbody>
 </table>
 
-<h1>Danh sach nhan vien</h1>
-<table class="table table-dark table-striped">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>email</th>
-        <th>password</th>
-        <th>fullname</th>
-        <th>luong</th>
-        <th>dia chi</th>
-        <th>active</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="nv : ${lstNhanVien}">
-        <td th:text="${nv.id}"></td>
-        <td th:text="${nv.email}"></td>
-        <td th:text="${nv.password}"></td>
-        <td th:text="${nv.fullname}"></td>
-        <td th:text="${nv.luong}"></td>
-        <td th:text="${nv.diaChi}"></td>
-        <td th:text="${nv.active ? 'Còn làm' : 'Nghỉ làm'}"></td>
-    </tr>
-    </tbody>
-</table>
+<!--<h1>Danh sach nhan vien</h1>-->
+<!--<table class="table table-dark table-striped">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>ID</th>-->
+<!--        <th>email</th>-->
+<!--        <th>password</th>-->
+<!--        <th>fullname</th>-->
+<!--        <th>luong</th>-->
+<!--        <th>dia chi</th>-->
+<!--        <th>active</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="nv : ${lstNhanVien}">-->
+<!--        <td th:text="${nv.id}"></td>-->
+<!--        <td th:text="${nv.email}"></td>-->
+<!--        <td th:text="${nv.password}"></td>-->
+<!--        <td th:text="${nv.fullname}"></td>-->
+<!--        <td th:text="${nv.luong}"></td>-->
+<!--        <td th:text="${nv.diaChi}"></td>-->
+<!--        <td th:text="${nv.active ? 'Còn làm' : 'Nghỉ làm'}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
 </body>
 </html>
