@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.NhanVien;
-import com.example.demo.model.User;
+import com.example.demo.model.*;
+import com.example.demo.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -32,16 +34,38 @@ public class UserController {
     ArrayList<User> users = new ArrayList<>();
 
     public UserController(){
-        users.add(new User(1, "anhptqth05962@gmail.com", "123456", "Phạm Thị Quỳnh Anh", "0337376926", true, true));
-        users.add(new User(2, "anhptqth05962@gmail.com", "123456", "Phạm Thị Quỳnh Anh", "0346112846", true, false));
-        users.add(new User(3, "anhptqth05962@gmail.com", "123456", "Phạm Thị Quỳnh Anh", "0335223426", false, true));
-        users.add(new User(4, "anhptqth05962@gmail.com", "123456", "Phạm Thị Quỳnh Anh", "0948998656", true, true));
-        users.add(new User(5, "anhptqth05962@gmail.com", "123456", "Phạm Thị Quỳnh Anh", "0997277009", true, true));
+
     }
+
+    @Autowired
+    UserRepo userRepo;
+    @Autowired
+    CategoryRepo categoryRepo;
+    @Autowired
+    BillDetailRepo billDetailRepo;
+    @Autowired
+    BillRepo  billRepo;
+    @Autowired
+    DrinkRepo drinkRepo;
+
     @GetMapping("/list-user")
     public String listUser(Model model){
         // truyen danh sach user cho UI
+        List<User> users = userRepo.findAll();
         model.addAttribute("users", users);
+
+        List<Category> categories = categoryRepo.findAll();
+        model.addAttribute("categories", categories);
+
+        List<Drink> drinks = drinkRepo.findAll();
+        model.addAttribute("drinks", drinks);
+
+        List<BillDetail> billDetails = billDetailRepo.findAll();
+        model.addAttribute("billDetails", billDetails);
+
+        List<Bill> bills = billRepo.findAll();
+        model.addAttribute("bills", bills);
+
 
 //        ArrayList<NhanVien> nhanViens = new ArrayList<>();
 //        nhanViens.add(new NhanVien(1, "nhanvien1@gmail.com", "123456789", "Nguyen Van A", 30.000,"Cau Giay", true));
