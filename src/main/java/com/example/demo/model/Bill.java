@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Table(name = "bills")
 public class Bill {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -30,7 +31,7 @@ public class Bill {
     @Column(name = "status")
     private String status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }

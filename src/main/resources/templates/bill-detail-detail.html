@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+<body class="container">
+<form action="/update-bill-detail" method="post" class="container">
+    <label class="col-6 mb-4 text-start">Id</label>
+    <input type="number" name="id" th:value="${bd.id}" readonly><br>
+
+    <label class="col-6 mb-4 text-start">Quantity</label>
+    <input type="number" name="quantity" th:value="${bd.quantity}"><br>
+
+    <label class="col-6 mb-4 text-start">Price</label>
+    <input type="number" name="price" th:value="${bd.price}"><br>
+
+    <label class="col-6 mb-4 text-start">Bill</label>
+    <select th:name="bill" >
+        <div>
+            <option th:each="b : ${bills}"
+                    th:value="${b.id}"
+                    th:text="${b.code}"
+                    th:selected="${b.id==bd.bill?.id}">
+            </option>
+        </div>
+    </select>
+
+    <label class="col-6 mb-4 text-start">Drink</label>
+    <select th:name="drink">
+        <div>
+            <option th:each="d : ${drinks}"
+                    th:value="${d.id}"
+                    th:text="${d.name}"
+            th:selected="${d.id==bd.drink?.id}">
+            </option>
+        </div>
+    </select>
+    <br>
+    <button class="btn btn-outline-info">Update</button>
+    <a href="/bill-detail" class="btn btn-outline-info">Back</a>
+</form>
+<table class="table table-hover mb-5">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Bill</th>
+        <th>Drink</th>
+        <th>Chức năng</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bd : ${billDetails}">
+        <td th:text="${bd.id}"></td>
+        <td th:text="${bd.quantity}"></td>
+        <td th:text="${bd.price}"></td>
+        <td th:text="${bd.bill?.id}"></td>
+        <td th:text="${bd.drink?.name}"></td>
+        <td>
+            <a th:href="@{|/delete-bill-detail?id=${bd.id}|}" class="btn btn-outline-info">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

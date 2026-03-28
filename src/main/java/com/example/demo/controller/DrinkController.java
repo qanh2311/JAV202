@@ -53,7 +53,7 @@ public class DrinkController {
     }
 
     @PostMapping("/update-drink")
-    public String updateDrink(Drink drink, Model model) {
+    public String updateDrink(Drink drink) {
         drinkRepo.save(drink);
         return "redirect:/drink";
     }

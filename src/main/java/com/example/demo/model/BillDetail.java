@@ -24,11 +24,11 @@ public class BillDetail {
     @Column(name = "price")
     private Integer price;
 
-    @ManyToOne
-    @JoinColumn(name = "bill_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bill_id", referencedColumnName = "id")
     private Bill bill;
 
-    @ManyToOne
-    @JoinColumn(name = "drink_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "drink_id", referencedColumnName = "id")
     private Drink drink;
 }

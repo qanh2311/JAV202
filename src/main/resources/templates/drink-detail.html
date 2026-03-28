@@ -37,8 +37,8 @@
     <label class="col-6 mb-4 text-start">Active</label>
     <input type="radio" name="active" value="true" th:checked="${drink.active == true}"> Hoạt động
     <input type="radio" name="active" value="false" th:checked="${drink.active == false}"> Không hoạt động <br>
-    <button type="submit" class="btn btn-warning">Update</button>
-    <a href="/drink" class="btn btn-warning">Back</a>
+    <button type="submit" class="btn btn-outline-danger">Update</button>
+    <a href="/drink" class="btn btn-outline-danger">Back</a>
 </form>
 
 <hr>
@@ -66,7 +66,7 @@
         <td th:text="${drink.active?'Hoạt động':'Ngừng hoạt động'}"></td>
 
         <td>
-            <a th:href="@{|/detail-drink?id=${drink.id}|}" class="btn btn-warning">Detail</a>
+            <a th:href="@{|/detail-drink?id=${drink.id}|}" class="btn btn-outline-danger">Detail</a>
         </td>
     </tr>
     </tbody>
