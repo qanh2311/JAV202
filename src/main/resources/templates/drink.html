@@ -6,7 +6,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
 </head>
-<body>
+<body class="container">
+<h1 class="text-center">Danh sách</h1>
 <form action="/add-drink" method="post" class="container">
     <label class="col-6 mb-4 text-start">Name</label> <input type="text" name="name"> <br>
     <label class="col-6 mb-4 text-start">Price</label> <input type="text" name="price"> <br>
@@ -24,7 +25,7 @@
     <label class="col-6 mb-4 text-start">Actvie</label>
     <input type="radio" name="active" value="true"> Hoat dong
     <input type="radio" name="active" value="false"> Khong hoat dong <br>
-    <button type="submit" class="btn btn-danger">Them</button>
+    <button type="submit" class="btn btn-danger">Add</button>
 </form>
 <hr>
 <table class="table table-hover mb-5">
@@ -33,8 +34,11 @@
         <th>ID</th>
         <th>Tên món</th>
         <th>Giá</th>
+        <th>Ảnh</th>
         <th>Danh mục</th>
         <th>Mô tả</th>
+        <th>Hoạt động</th>
+        <th>Chức năng</th>
     </tr>
     </thead>
     <tbody>
@@ -42,8 +46,15 @@
         <td th:text="${drink.id}"></td>
         <td th:text="${drink.name}"></td>
         <td th:text="${drink.price}"></td>
+        <td th:text="${drink.image}"></td>
         <td th:text="${drink.category?.name}"></td>
         <td th:text="${drink.description}"></td>
+        <td th:text="${drink.active?'Hoạt động':'Ngừng hoạt động'}"></td>
+
+        <td>
+            <a th:href="@{|/delete-drink?id=${drink.id}|}" class="btn btn-danger">Delete</a>
+            <a th:href="@{|/detail-drink?id=${drink.id}|}" class="btn btn-danger">Detail</a>
+        </td>
     </tr>
     </tbody>
 </table>

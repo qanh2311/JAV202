@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+<body class="container">
+<h1 class="text-center">Thông tin</h1>
+<form action="/update-drink" method="post" class="container">
+    <label class="col-6 mb-4 text-start">Id</label>
+    <input type="text" name="id" th:value="${drink.id}" readonly> <br>
+    <label class="col-6 mb-4 text-start">Name</label>
+    <input type="text" name="name" th:value="${drink.name}"> <br>
+
+    <label class="col-6 mb-4 text-start">Price</label>
+    <input type="text" name="price" th:value="${drink.price}"> <br>
+
+    <label class="col-6 mb-4 text-start">Image</label>
+    <input type="text" name="image" th:value="${drink.image}"> <br>
+
+    <label class="col-6 mb-4 text-start">Description</label>
+    <input type="text" name="description" th:value="${drink.description}"> <br>
+
+    <label class="col-6 mb-4 text-start">Category</label>
+    <select name="category">
+        <div class="form-select">
+            <option th:each="c : ${listCategory}"
+                    th:value="${c.id}"
+                    th:text="${c.name}"
+                    th:selected="${c.id == drink.category?.id}">
+            </option>
+        </div>
+    </select> <br>
+
+    <label class="col-6 mb-4 text-start">Active</label>
+    <input type="radio" name="active" value="true" th:checked="${drink.active == true}"> Hoạt động
+    <input type="radio" name="active" value="false" th:checked="${drink.active == false}"> Không hoạt động <br>
+    <button type="submit" class="btn btn-warning">Update</button>
+    <a href="/drink" class="btn btn-warning">Back</a>
+</form>
+
+<hr>
+<table class="table table-hover mb-5">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên món</th>
+        <th>Giá</th>
+        <th>Ảnh</th>
+        <th>Danh mục</th>
+        <th>Mô tả</th>
+        <th>Active</th>
+        <th>Chức năng</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="drink : ${drinks}">
+        <td th:text="${drink.id}"></td>
+        <td th:text="${drink.name}"></td>
+        <td th:text="${drink.price}"></td>
+        <td th:text="${drink.image}"></td>
+        <td th:text="${drink.category?.name}"></td>
+        <td th:text="${drink.description}"></td>
+        <td th:text="${drink.active?'Hoạt động':'Ngừng hoạt động'}"></td>
+
+        <td>
+            <a th:href="@{|/detail-drink?id=${drink.id}|}" class="btn btn-warning">Detail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
