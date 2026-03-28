@@ -100,4 +100,31 @@ public class UserController {
         model.addAttribute("user", result);
         return "user-detail.html";
     }
+
+    @PostMapping("/save")
+    public String save(User user
+    ){
+        userRepo.save(user);
+        System.out.println(user);
+        return "redirect:/list-user";
+
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Integer id){
+        userRepo.deleteById(id);
+        return "redirect:/list-user";
+    }
+
+    @GetMapping("/delete-category")
+    public String deleteCategory(@RequestParam("id") Integer id){
+        categoryRepo.deleteById(id);
+        return "redirect:/list-user";
+    }
+
+    @PostMapping("/save-category")
+    public String saveCategory(Category category){
+        categoryRepo.save(category);
+        return "redirect:/list-user";
+    }
 }

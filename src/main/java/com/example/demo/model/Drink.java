@@ -14,6 +14,7 @@ import lombok.Setter;
 @Table(name = "drinks")
 public class Drink {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -32,7 +33,10 @@ public class Drink {
     @Column(name = "active")
     private Boolean active;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    //lazy từ id của category tự động select ra category
     @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
+
+
 }
