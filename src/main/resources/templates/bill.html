@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="container">
+<form action="/add-bill" method="post" class="container" >
+    <label class="col-6 mb-4 text-start">Code</label><input type="text" name="code"> <br>
+    <label class="col-6 mb-4 text-start">Created_At</label><input type="date" name="createdAt"> <br>
+    <label class="col-6 mb-4 text-start">Total</label><input type="number" name="total"> <br>
+    <label class="col-6 mb-4 text-start">Status</label><input type="text" name="status"> <br>
+    <label class="col-6 mb-4 text-start">User</label>
+    <select th:name="user">
+        <div class="form-select">
+            <option th:each="u : ${users}"
+            th:value="${u.id}"
+            th:text="${u.fullname}">
+            </option>
+        </div>
+    </select>
+    <br>
+    <button class="btn btn-dark">Add</button>
+</form>
+<table class="table table-hover mb-5">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Code</th>
+        <th>Created_At</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>User</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="b : ${bills}">
+        <td th:text="${b.id}"></td>
+        <td th:text="${b.code}"></td>
+        <td th:text="${b.createdAt}"></td>
+        <td th:text="${b.total}"></td>
+        <td th:text="${b.status}"></td>
+        <td th:text="${b.user?.fullname}"></td>
+        <td>
+            <a th:href="@{|/delete-bill?id=${b.id}|}" class="btn btn-dark">Delete</a>
+            <a th:href="@{|/detail-bill?id=${b.id}|}" class="btn btn-dark">Detail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
