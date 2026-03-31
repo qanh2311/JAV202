@@ -15,6 +15,7 @@
 <!--<p>Username: <label th:text="${username}"></label></p>-->
 <!--<p>Password: <label th:text="${password}"></label></p>-->
 <!--<hr>-->
+
 <h1>Form của user</h1>
 <form action="/save" method="post" class="container">
     <label class="col-6 mb-4 text-start">email</label><input type="text" name="email" th:text="${user.email}"><br>
@@ -45,6 +46,15 @@
 <form action="/search" method="post">
     Nhap sdt: <input type="text" name="phone">
     <button type="submit" class="btn btn-danger">Tim kiem</button>
+</form>
+<hr>
+<h1>Tìm kiếm user bằng fullname và role</h1>
+<form action="/search-user" method="get">
+    Full Name: <input type="text" name="fullname"><br>
+    Role: <input type="radio" name="role" value="true"> Hoạt động
+    <input type="radio" name="role" value="false"> Không hoạt động
+    <br>
+    <button class="btn btn-danger">Search</button>
 </form>
 <h1>Danh sách</h1>
 

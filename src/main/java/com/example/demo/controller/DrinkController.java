@@ -57,4 +57,12 @@ public class DrinkController {
         drinkRepo.save(drink);
         return "redirect:/drink";
     }
+
+    @GetMapping("/search-drink")
+    public String searchDrink(Model model, @RequestParam("price1") Integer price1, @RequestParam("price2") Integer price2) {
+        List<Drink> drinks = drinkRepo.getByPrice(price1, price2);
+        model.addAttribute("drinks", drinks);
+        return "drink";
+    }
+
 }

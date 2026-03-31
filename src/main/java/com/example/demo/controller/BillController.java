@@ -30,7 +30,7 @@ public class BillController {
         model.addAttribute("b", bill);
         model.addAttribute("bills", billRepo.findAll());
         model.addAttribute("users", userRepo.findAll());
-        return "billdetail";
+        return "bill-detail";
     }
 
     @PostMapping("/add-bill")

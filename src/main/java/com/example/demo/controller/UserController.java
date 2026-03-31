@@ -50,41 +50,29 @@ public class UserController {
 
     @GetMapping("/list-user")
     public String listUser(Model model){
-        // truyen danh sach user cho UI
         List<User> users = userRepo.findAll();
         model.addAttribute("users", users);
 
-        List<Category> categories = categoryRepo.findAll();
-        model.addAttribute("categories", categories);
+        // 2. QUAN TRỌNG: Gửi 1 đối tượng User trống để cái Form ở đầu trang không bị lỗi
+        model.addAttribute("user", new User());
 
-        List<Drink> drinks = drinkRepo.findAll();
-        model.addAttribute("drinks", drinks);
+        model.addAttribute("categories", categoryRepo.findAll());
+        model.addAttribute("drinks", drinkRepo.findAll());
+        model.addAttribute("billDetails", billDetailRepo.findAll());
+        model.addAttribute("bills", billRepo.findAll());
 
-        List<BillDetail> billDetails = billDetailRepo.findAll();
-        model.addAttribute("billDetails", billDetails);
-
-        List<Bill> bills = billRepo.findAll();
-        model.addAttribute("bills", bills);
-
-
-//        ArrayList<NhanVien> nhanViens = new ArrayList<>();
-//        nhanViens.add(new NhanVien(1, "nhanvien1@gmail.com", "123456789", "Nguyen Van A", 30.000,"Cau Giay", true));
-//        nhanViens.add(new NhanVien(2, "nhanvien1@gmail.com", "123456789", "Nguyen Van A", 30.000,"Cau Giay", true));
-//        nhanViens.add(new NhanVien(3, "nhanvien1@gmail.com", "123456789", "Nguyen Van A", 30.000,"Cau Giay", true));
-//        nhanViens.add(new NhanVien(4, "nhanvien1@gmail.com", "123456789", "Nguyen Van A", 30.000,"Cau Giay", true));
-//        nhanViens.add(new NhanVien(5, "nhanvien1@gmail.com", "123456789", "Nguyen Van A", 30.000,"Cau Giay", true));
-//        model.addAttribute("lstNhanVien", nhanViens);
         return "index.html";
     }
 
     @GetMapping("/detail")
-    public String detail(Model model, @RequestParam("id") Integer id ){
-        User result = new User();
-        for (User u : users){
-            if(u.getId().equals(id)){
-                result = u;
-            }
+    public String detail(Model model, @RequestParam("id") Integer id) {
+        // Fetch from database instead of the empty ArrayList
+        User result = userRepo.findById(id).orElse(null);
+
+        if (result == null) {
+            return "redirect:/list-user";
         }
+
         model.addAttribute("user", result);
         return "user-detail.html";
     }
@@ -107,7 +95,6 @@ public class UserController {
         userRepo.save(user);
         System.out.println(user);
         return "redirect:/list-user";
-
     }
 
     @GetMapping("/delete")
@@ -126,5 +113,22 @@ public class UserController {
     public String saveCategory(Category category){
         categoryRepo.save(category);
         return "redirect:/list-user";
+    }
+
+    @GetMapping("/search-user")
+    public String search(@RequestParam("fullname") String fullname, @RequestParam("role") Boolean role, Model model){
+        List<User> users = userRepo.getByFullnameAndRole(fullname, role);
+        model.addAttribute("users", users);
+
+        // THÊM DÒNG NÀY: Để tránh lỗi null khi quay lại trang index
+        model.addAttribute("user", new User());
+
+        // Bổ sung các list khác để các bảng bên dưới không bị trống dữ liệu
+        model.addAttribute("categories", categoryRepo.findAll());
+        model.addAttribute("drinks", drinkRepo.findAll());
+        model.addAttribute("billDetails", billDetailRepo.findAll());
+        model.addAttribute("bills", billRepo.findAll());
+
+        return "index.html";
     }
 }

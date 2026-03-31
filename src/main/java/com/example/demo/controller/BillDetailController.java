@@ -30,7 +30,7 @@ public class BillDetailController {
         model.addAttribute("billDetails", listBillDetails);
         model.addAttribute("drinks", drinkRepo.findAll());
         model.addAttribute("bills", billRepo.findAll());
-        return "bill-detail";
+        return "billDetail";
     }
 
     @PostMapping("/add-bill-detail")
@@ -55,7 +55,7 @@ public class BillDetailController {
         model.addAttribute("billDetails", billDetailRepo.findAll());
         model.addAttribute("drinks", drinkRepo.findAll());
         model.addAttribute("bills", billRepo.findAll());
-        return "bill-detail-detail";
+        return "billDetail-detail";
     }
 
     @PostMapping("/update-bill-detail")

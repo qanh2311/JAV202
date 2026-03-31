@@ -25,7 +25,14 @@
     <label class="col-6 mb-4 text-start">Actvie</label>
     <input type="radio" name="active" value="true"> Hoat dong
     <input type="radio" name="active" value="false"> Khong hoat dong <br>
-    <button type="submit" class="btn btn-danger">Ad</button>
+    <button type="submit" class="btn btn-danger">Add</button>
+</form>
+<hr>
+<form action="/search-drink">
+    <label class="col-6 mb-4 text-start">Giá min: <input type="number" name="price1"></label>
+    <label class="col-6 mb-4 text-start">Giá max: <input type="number" name="price2"></label><br>
+    <button class="btn btn-danger">Search</button>
+    <a href="/drink" class="btn btn-danger">Back</a>
 </form>
 <hr>
 <table class="table table-hover mb-5">
