@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+<body class="container">
+<table class="table table-hover mb-5">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>name</th>
+            <th>so luong</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="d : ${list}">
+            <td th:text="${d.id}"></td>
+            <td th:text="${d.name}"></td>
+            <td th:text="${d.soLuong}"></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
