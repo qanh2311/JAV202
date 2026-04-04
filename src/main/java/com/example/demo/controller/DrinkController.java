@@ -5,6 +5,9 @@ import com.example.demo.model.Drink;
 import com.example.demo.repository.CategoryRepo;
 import com.example.demo.repository.DrinkRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,6 +65,16 @@ public class DrinkController {
     public String searchDrink(Model model, @RequestParam("price1") Integer price1, @RequestParam("price2") Integer price2) {
         List<Drink> drinks = drinkRepo.getByPrice(price1, price2);
         model.addAttribute("drinks", drinks);
+        return "drink";
+    }
+
+    @GetMapping("/page")
+    public String page(Model model,
+                       @RequestParam("pageNumber") Integer pageNumber,
+                       @RequestParam("pageSize") Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Drink> page = drinkRepo.findAll(pageable);
+        model.addAttribute("drinks" , page);
         return "drink";
     }
 
