@@ -7,7 +7,7 @@
 </head>
 <body class="container">
 <h1 class="text-center">Form drink</h1>
-<form action="/update-bill" method="post" class="container mt-4 p-4">
+<form action="/bill/update-bill" method="post" class="container mt-4 p-4">
 
     <div class="row mb-3">
         <label class="col-4 col-form-label">Id</label>
@@ -63,7 +63,7 @@
 
     <div class="mt-3">
         <button class="btn btn-outline-dark">Update</button>
-        <a href="/bill" class="btn btn-outline-secondary">Back</a>
+        <a href="/bill/show?page=0" class="btn btn-outline-secondary">Back</a>
     </div>
 
 </form>
@@ -88,7 +88,7 @@
         <td th:text="${b.status}"></td>
         <td th:text="${b.user?.fullname}"></td>
         <td>
-            <a th:href="@{|/detail-bill?id=${b.id}|}" class="btn btn-outline-dark">Detail</a>
+            <a th:href="@{|/bill/detail-bill?id=${b.id}|}" class="btn btn-outline-dark">Detail</a>
         </td>
     </tr>
     </tbody>

@@ -7,7 +7,7 @@
 </head>
 <body class="container">
 <h1 class="text-center">Form drink</h1>
-<form action="/add-bill" method="post" class="container mt-4">
+<form action="/bill/add-bill" method="post" class="container mt-4">
 
     <div class="row mb-3">
         <label class="col-4 col-form-label">Code</label>
@@ -76,8 +76,8 @@
         <td th:text="${b.status}"></td>
         <td th:text="${b.user?.fullname}"></td>
         <td>
-            <a th:href="@{|/delete-bill?id=${b.id}|}" class="btn btn-dark">Delete</a>
-            <a th:href="@{|/detail-bill?id=${b.id}|}" class="btn btn-dark">Detail</a>
+            <a th:href="@{|/bill/delete-bill?id=${b.id}|}" class="btn btn-dark">Delete</a>
+            <a th:href="@{|/bill/detail-bill?id=${b.id}|}" class="btn btn-dark">Detail</a>
         </td>
     </tr>
     </tbody>
